@@ -226,9 +226,9 @@ public class VodServiceImpl extends com.volcengine.service.BaseServiceImpl imple
         byte[] data = new byte[com.volcengine.helper.Const.MinChunkSize];
         List<String> parts = new ArrayList<>();
         long num = file.length() / com.volcengine.helper.Const.MinChunkSize;
-        long lastNum = num - 1;
+        long lastNum = num;
         try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file))) {
-            for (long i = 0; i < lastNum; i++) {
+            for (long i = 1; i < lastNum; i++) {
                 bis.read(data);
                 parts.add(uploadPart(host, oid, auth, uploadID, i, data, isLargeFile, retryer));
             }
